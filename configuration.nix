@@ -103,6 +103,9 @@
 	feh
 	picom
 	neofetch
+	runelite
+	blender
+	prusa-slicer
     ];
 };
 
