@@ -1,0 +1,10 @@
+# increase by 3%
+amixer -q sset Master 3%+
+
+# decrease by 3%
+amixer -q sset Master 3%-
+
+# mute/unmute
+amixer -q sset Master toggle
+
+amixer sset 'Master' 50%
