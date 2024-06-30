@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=upExec
+Exec=bash ~/.config/leftwm/themes/current/up
+StartupNotify=false
+Terminal=false

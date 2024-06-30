@@ -1,0 +1,48 @@
+window:
+  opacity: 0.95
+
+font:
+  size: 14
+  normal:
+    family: JetBrainsMono
+    style: Regular
+  bold:
+    family: JetBrainsMono
+    style: Bold
+  italic:
+    family: JetBrainsMono
+    style: Italic
+  bold_italic:
+    family: JetBrainsMono
+    style: Bold Italic
+
+  draw_bold_text_with_bright_colors: true
+
+colors:
+# Default colors
+  primary:
+      background: '#161821'
+      foreground: '#d2d4de'
+
+  # Normal colors
+  normal:
+      black:   '#020102'
+      red:     '#f86c61'
+      green:   '#74f584'
+      yellow:  '#f5f654'
+      blue:    '#597aed'
+      magenta: '#e46fbb'
+      cyan:    '#8af1e8'
+      white:   '#e0dee0'
+
+  # Bright colors
+  bright:
+      black:   '#545053'
+      red:     '#f51c0a'
+      green:   '#11ee2c'
+      yellow:  '#f1f20d'
+      blue:    '#1947e6'
+      magenta: '#d72899'
+      cyan:    '#1be4d3'
+      white:   '#fcfcfc'
+
