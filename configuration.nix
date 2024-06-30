@@ -13,7 +13,6 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
 
   networking.hostName = "jc"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -23,7 +22,7 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  services.connman.enable = true;
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Australia/Sydney";
@@ -42,86 +41,95 @@
     LC_TELEPHONE = "en_AU.UTF-8";
     LC_TIME = "en_AU.UTF-8";
   };
-
+ 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the Leftwm WindowManager.
+  # Enable the Leftwm windowmanager.
   services.xserver.displayManager.lightdm.enable = true;
   services.xserver.windowManager.leftwm.enable = true;
-
-  # Enable acpid
-  services.acpid.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
     layout = "us";
     xkbVariant = "";
   };
+  
+  # Enable acpid
+  services.acpid.enable = true;
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
+  # Configure console keymap
+  console.keyMap = "us";
+  
+  #Enable sound with pipwire
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+  enable = true;
+  alsa.enable = true;
+  alsa.support32Bit = true;
+  pulse.enable = true;
+  #jack.enable = true;
   };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jc = {
     isNormalUser = true;
     description = "Jack Coulter";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
     packages = with pkgs; [
-    	firefox
-	neovim
-	leftwm
-	polybar
-	xfce.thunar
+	firefox
 	rofi
-	alacritty
-	flatpak
 	go
+	feh
 	zsh
 	exercism
-	git
-	feh
 	picom
 	neofetch
-	runelite
 	blender
 	prusa-slicer
+	unzip
+	gnome.gnome-software
+	discord
+	rawtherapee
+	spotify
+	gimp
+	vscode
+	rpi-imager
+	gh
+	lsof
+	flameshot
     ];
-};
+  };
+
+programs.steam.enable = true;
+xdg.portal.enable = true;
+xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+services.flatpak.enable = true;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  gnome3.adwaita-icon-theme
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+	neovim 
+	git
+	leftwm
+	polybar
+	alacritty
+	gnome3.adwaita-icon-theme
+	wineWowPackages.stable
+	cmake
+	gcc
+	build-essential
   ];
 
 fonts.fonts = with pkgs; [
-  jetbrains-mono
-];
+	jetbrains-mono
+	];
 
- 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -147,6 +155,6 @@ fonts.fonts = with pkgs; [
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.11"; # Did you read the comment?
+  system.stateVersion = "23.05"; # Did you read the comment?
 
 }
