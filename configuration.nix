@@ -81,13 +81,11 @@
     packages = with pkgs; [
 	firefox
 	rofi
-	go
 	feh
 	zsh
 	exercism
 	picom
 	neofetch
-	blender
 	prusa-slicer
 	unzip
 	gnome.gnome-software
@@ -104,6 +102,10 @@
   };
 
 programs.steam.enable = true;
+programs.steam.gamescopeSession.enable = true;
+
+programs.gamemode.enable = true;
+
 xdg.portal.enable = true;
 xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 services.flatpak.enable = true;
@@ -120,11 +122,17 @@ services.flatpak.enable = true;
 	polybar
 	alacritty
 	gnome3.adwaita-icon-theme
-	wineWowPackages.stable
 	cmake
 	gcc
 	build-essential
+	mangohud
+	protonup
   ];
+
+environment.sessionVariables = {
+	STEAM_EXTRA_COMPAT_TOOLS_PATHS =
+		"/home/jc/.steam/root/compatibilitytools.d";
+		};
 
 fonts.fonts = with pkgs; [
 	jetbrains-mono
