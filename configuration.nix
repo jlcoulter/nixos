@@ -1,7 +1,6 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -44,6 +43,10 @@
  
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.excludePackages = with pkgs; [
+  xterm
+];
+
 
   # Enable the Leftwm windowmanager.
   services.xserver.displayManager.lightdm.enable = true;
@@ -51,8 +54,8 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
-    xkbVariant = "";
+    xkb.layout = "us";
+    xkb.variant = "";
   };
   
   # Enable acpid
@@ -62,6 +65,7 @@
   console.keyMap = "us";
   
   #Enable sound with pipwire
+  #amixer set 'Master' 10%+/10%-/80%
   sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
@@ -80,6 +84,7 @@
     extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
     packages = with pkgs; [
 	firefox
+	flatpak
 	rofi
 	feh
 	zsh
@@ -95,20 +100,26 @@
 	gimp
 	vscode
 	rpi-imager
-	gh
-	lsof
+	lsof #list of open files
+	darktable
+	davinci-resolve
+	inkscape
 	flameshot
+	blender
+	steam
     ];
+    shell = pkgs.zsh;
   };
+
+programs.zsh.enable = true;
 
 programs.steam.enable = true;
 programs.steam.gamescopeSession.enable = true;
 
 programs.gamemode.enable = true;
 
-xdg.portal.enable = true;
-xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-services.flatpak.enable = true;
+documentation.nixos.enable = false; #disable nixos manual
+services.gnome.core-utilities.enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -122,10 +133,6 @@ services.flatpak.enable = true;
 	polybar
 	alacritty
 	gnome3.adwaita-icon-theme
-	cmake
-	gcc
-	build-essential
-	mangohud
 	protonup
   ];
 
@@ -134,7 +141,7 @@ environment.sessionVariables = {
 		"/home/jc/.steam/root/compatibilitytools.d";
 		};
 
-fonts.fonts = with pkgs; [
+fonts.packages = with pkgs; [
 	jetbrains-mono
 	];
 
