@@ -1,13 +1,15 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, pkgs, ... }:
+{ config, pkgs,inputs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+  
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -47,9 +49,13 @@
   xterm
 ];
 
+  # Enable light dm and keyring
+  services.xserver.displayManager.lightdm.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.lightdm.enableGnomeKeyring = true;
+  programs.seahorse.enable = true;
 
   # Enable the Leftwm windowmanager.
-  services.xserver.displayManager.lightdm.enable = true;
   services.xserver.windowManager.leftwm.enable = true;
 
   # Configure keymap in X11
@@ -66,7 +72,7 @@
   
   #Enable sound with pipwire
   #amixer set 'Master' 10%+/10%-/80%
-  sound.enable = true;
+  #sound.enable = true;
   hardware.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -83,7 +89,7 @@
     description = "Jack Coulter";
     extraGroups = [ "networkmanager" "wheel" "scanner" "lp" ];
     packages = with pkgs; [
-	firefox
+    	firefox
 	flatpak
 	rofi
 	feh
@@ -93,7 +99,6 @@
 	neofetch
 	prusa-slicer
 	unzip
-	gnome.gnome-software
 	discord
 	rawtherapee
 	spotify
@@ -107,19 +112,25 @@
 	flameshot
 	blender
 	steam
-    ];
-    shell = pkgs.zsh;
+	home-manager
+    ]; 
+shell = pkgs.zsh;
   };
 
-programs.zsh.enable = true;
 
-programs.steam.enable = true;
-programs.steam.gamescopeSession.enable = true;
+  programs.zsh.enable = true;
 
-programs.gamemode.enable = true;
 
-documentation.nixos.enable = false; #disable nixos manual
-services.gnome.core-utilities.enable = false;
+  home-manager = {
+  # also pass inputs to home-manager modules
+  extraSpecialArgs = {inherit inputs;};
+  users = {
+    "jc" = import ./home.nix;
+  };
+};
+
+  documentation.nixos.enable = false; #disable nixos manual
+  services.gnome.core-utilities.enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -132,18 +143,14 @@ services.gnome.core-utilities.enable = false;
 	leftwm
 	polybar
 	alacritty
-	gnome3.adwaita-icon-theme
 	protonup
   ];
 
-environment.sessionVariables = {
-	STEAM_EXTRA_COMPAT_TOOLS_PATHS =
-		"/home/jc/.steam/root/compatibilitytools.d";
-		};
-
-fonts.packages = with pkgs; [
+  fonts.packages = with pkgs; [
 	jetbrains-mono
 	];
+
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
