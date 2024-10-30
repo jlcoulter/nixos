@@ -11,19 +11,36 @@
     extraConfig = ''
       set number relativenumber
       '';
-      plugins = with pkgs.vimPlugins; [
-        {
-  	  plugin = nvim-lspconfig;
-	}
+    extraPackages = with pkgs; [
+      xclip wl-clipboard
+      luajitPackages.lua-lsp
       ];
-    };
-  
 
 
+      plugins = with pkgs.vimPlugins; [
+        
+	comment-nvim
+	telescope-nvim
+	nvim-treesitter
+        nvim-lspconfig
+	nvim-cmp
 
-extraLuaConfig = ''
+	];
+      extraLuaConfig = ''
     ${builtins.readFile ./nvim/init.lua}
     '';
+
+};
+    
+  gtk = { 
+    enable = true;
+    iconTheme = {
+      name = "SolArc-Dark";
+      package = pkgs.solarc-gtk-theme;
+      };
+      };
+
+ home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ"; 
 
   programs.home-manager.enable = true;
 }

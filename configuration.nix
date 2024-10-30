@@ -102,7 +102,6 @@
 	prusa-slicer
 	unzip
 	discord
-	rawtherapee
 	spotify
 	gimp
 	vscode
@@ -117,6 +116,9 @@
 	home-manager
 	alejandra
 	nixd
+	gparted
+	killall
+	gh
     ]; 
 shell = pkgs.zsh;
   };
@@ -128,7 +130,8 @@ shell = pkgs.zsh;
     "jc" = import ./home.nix;
   };
 };
-
+ # steam "glxchoose visual" issue 
+  hardware.opengl.driSupport32Bit = true;
   programs.zsh.enable = true;
 
 
