@@ -8,6 +8,8 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -113,13 +115,11 @@
 	blender
 	steam
 	home-manager
+	alejandra
+	nixd
     ]; 
 shell = pkgs.zsh;
   };
-
-
-  programs.zsh.enable = true;
-
 
   home-manager = {
   # also pass inputs to home-manager modules
@@ -128,6 +128,9 @@ shell = pkgs.zsh;
     "jc" = import ./home.nix;
   };
 };
+
+  programs.zsh.enable = true;
+
 
   documentation.nixos.enable = false; #disable nixos manual
   services.gnome.core-utilities.enable = false;
