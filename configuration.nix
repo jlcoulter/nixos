@@ -63,7 +63,6 @@
   hardware.sane = { enable = true; extraBackends = [ pkgs.utsushi ]; }; services.udev.packages = [ pkgs.utsushi ];
 
   # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -87,8 +86,6 @@
     description = "Jack Coulter";
     extraGroups = [ "networkmanager" "wheel" "scanner" "lp" "audio" ];
     packages = with pkgs; [
-        kdePackages.kate
-    	firefox
         flatpak
         rofi
         feh
@@ -113,7 +110,7 @@
         protonup
 	rawtherapee
 	zettlr
-	osu-lazer
+	osu-lazer-bin
 	texliveFull
 	scribus
 	xsane
@@ -122,9 +119,9 @@
 	krita
 	wacomtablet
 	openscad
-	python3Full
 	darktable
 	skanlite
+	librewolf
     ];
   };
 
