@@ -19,6 +19,14 @@ let rootPath = ../.; in
     #"config.ron".source = ../modules/leftwm;
   };
 
+  gtk = {
+    enable = false;
+    iconTheme = {
+      name = "SolArc-Dark";
+      package = pkgs.solarc-gtk-theme;
+    };
+  };
+
   programs.git = {
     enable = true;
     userName = "jlcoulter";
@@ -35,6 +43,7 @@ let rootPath = ../.; in
     autosuggestion.enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+    autocd = true;
 
 	  shellAliases = {
 	    ll = "ls -l";
