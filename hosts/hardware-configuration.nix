@@ -29,6 +29,11 @@
       fsType = "btrfs";
     };
 
+  fileSystems."/home/jc/games" =
+    { device = "/dev/disk/by-uuid/3ed3343d-22d2-4327-9f12-0c538250e0f0";
+      fsType = "ext4";
+    };
+
   swapDevices =
     [ { device = "/dev/disk/by-uuid/8e1ecf00-cd97-4e19-99d1-70f8e38d59d3"; }
     ];

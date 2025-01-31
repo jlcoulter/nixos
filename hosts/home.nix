@@ -1,18 +1,23 @@
 { config, pkgs, ... }:
 
+let rootPath = ../.; in
+
 {
   home.username = "jc";
   home.homeDirectory = "/home/jc";
   home.stateVersion = "24.11"; 
 
-
+  fonts.fontconfig.enable = true;
   home.packages = [
   pkgs.hello
+    pkgs.jetbrains-mono
 
     
   ];
 
-  home.file = {};
+  home.file = {
+    #"config.ron".source = ../modules/leftwm;
+  };
 
   programs.git = {
     enable = true;
@@ -25,25 +30,31 @@
       };
     };
 
-  gtk = {
+  programs.zsh = {
     enable = true;
-    theme.name = "adw-gtk3";
-    cursorTheme.name = "Bibata-Modern-Ice";
-    iconTheme.name = "GruvboxPlus";
-    };
+    autosuggestion.enable = true;
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
 
-    programs.zsh = {
-      enable = true;
-      enableAutosuggestions = true;
-      enableCompletion = true;
-      syntaxHihghlighting.enable = true;
+	  shellAliases = {
+	    ll = "ls -l";
+ 	   update = "sudo nixos-rebuild switch --flake ~/flake/#default";
+ 	   flake = "nvim ~/flake/flake.nix";
+ 	   home = "nvim ~/flake/hosts/home.nix";
+ 	   config = "nvim ~/flake/hosts/configuration.nix";
+ 	   osu = "xsetwacom --set \"Wacom One by Wacom M Pen stylus\" Area 0 6750 10800 13500 && osu\!";
+	    resettablet = "xsetwacom --set \"Wacom One by Wacom M Pen stylus\" ResetArea";
+   	 };
 
-      shellAliases = {
-        ll = "ls -l";
-	update = "sudo nixos-rebuild switch --flake ~/flake/#default";
-	};
-	histSize = 10000;
+ 	  oh-my-zsh = {
+   	       enable = true;
+		  plugins = [];
+		  theme = "agnoster";
+		};
+	
+
       };
+  
 
 
   home.sessionVariables = {
