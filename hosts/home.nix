@@ -51,8 +51,8 @@ let rootPath = ../.; in
  	   flake = "nvim ~/flake/flake.nix";
  	   home = "nvim ~/flake/hosts/home.nix";
  	   config = "nvim ~/flake/hosts/configuration.nix";
- 	   osu = "xsetwacom --set \"Wacom One by Wacom M Pen stylus\" Area 0 6750 10800 13500 && osu\!";
-	    resettablet = "xsetwacom --set \"Wacom One by Wacom M Pen stylus\" ResetArea";
+	   pynix = "nix-shell ~/code/shell.nix";
+	   nvimconfig = "nvim ~/.config/nvim/init.vim";
    	 };
 
  	  oh-my-zsh = {

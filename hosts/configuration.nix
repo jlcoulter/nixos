@@ -128,6 +128,12 @@
 	skanlite
 	firefox
 	aseprite
+	vimPlugins.nvim-lspconfig
+	pyright
+	nodejs_23
+	nixd
+	ruff
+	lua-language-server
     ];
   };
 
