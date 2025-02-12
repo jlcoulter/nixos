@@ -42,9 +42,21 @@
 
   services.xserver.enable = true;
 
+  services.blueman.enable = true;
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
   services.xserver.wacom.enable = true;
+
+  virtualisation.virtualbox.host.enable = true;
+  boot.kernelParams = [ "kvm.enable_virt_at_load=0" ];
+  users.extraGroups.vboxusers.members = ["jc"];
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
 
   services.xserver.xkb = {
     layout = "au";
@@ -59,6 +71,8 @@
     enable = true; 
     extraBackends = [ pkgs.utsushi ]; 
   }; 
+
+   hardware.opentabletdriver.enable = true;
   services.udev.packages = [ pkgs.utsushi ];
 
   security.rtkit.enable = true;
@@ -71,16 +85,19 @@
 
   programs.zsh.enable = true;
 
+
+    nix.settings.trusted-users = [ "root" "jc" ];
+
   users.users.jc = {
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "Jack Coulter";
-    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" "audio" ];
+    extraGroups = [ "networkmanager" "wheel" "scanner" "lp" "audio" "docker" ];
     packages = with pkgs; [
-        flatpak
 	libreoffice
 	nemo
         rofi
+	signal-desktop
         feh
         zsh
         neofetch
@@ -100,22 +117,13 @@
         git
         alacritty
         protonup
-	rawtherapee
 	zettlr
 	osu-lazer-bin
-	godot_4
 	texliveFull
-	scribus
-	xsane
+	#xsane
 	sane-airscan
 	sane-backends
 	krita
-	wacomtablet
-	kdePackages.wacomtablet
-	xf86_input_wacom
-	libwacom
-	libwacom-surface
-	openscad
 	darktable
 	skanlite
 	firefox
@@ -125,6 +133,7 @@
 
   fonts.packages = with pkgs; [
 	nerd-fonts.jetbrains-mono
+	google-fonts
 	];
 
 
