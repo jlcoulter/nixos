@@ -38,6 +38,11 @@ let rootPath = ../.; in
       };
     };
 
+  programs.zellij = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -49,15 +54,18 @@ let rootPath = ../.; in
 	    ll = "ls -l";
  	   update = "sudo nixos-rebuild switch --flake ~/flake/#default";
  	   flake = "nvim ~/flake/flake.nix";
- 	   home = "nvim ~/flake/hosts/home.nix";
- 	   config = "nvim ~/flake/hosts/configuration.nix";
+ 	   home = "nvim ~/flake/hosts/home/home.nix";
+ 	   config = "nvim ~/flake/hosts/home/configuration.nix";
 	   pynix = "nix-shell ~/code/shell.nix";
 	   nvimconfig = "nvim ~/.config/nvim/init.vim";
+	   fabric = "java -Xmx2G -jar fabric-server-mc.1.21.4-loader.0.16.10-launcher.1.0.1.jar nogui";
    	 };
 
  	  oh-my-zsh = {
    	       enable = true;
-		  plugins = [];
+		  plugins = [
+
+		  ];
 		  theme = "agnoster";
 		};
 	
