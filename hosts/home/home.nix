@@ -2,18 +2,15 @@
 
 let rootPath = ../.; in
 
-{
+{ 
+  imports = [
+    ./theme.nix
+    ./nvim.nix
+  ];
+
   home.username = "jc";
   home.homeDirectory = "/home/jc";
   home.stateVersion = "24.11"; 
-
-  fonts.fontconfig.enable = true;
-  home.packages = [
-  pkgs.hello
-    pkgs.jetbrains-mono
-
-    
-  ];
 
   home.file = {
     #"config.ron".source = ../modules/leftwm;
@@ -21,9 +18,21 @@ let rootPath = ../.; in
 
   gtk = {
     enable = false;
-    iconTheme = {
+    cursorTheme = {
+      name = "Nordic";
+      package = pkgs.nordic;
+    };
+    theme = {
       name = "SolArc-Dark";
       package = pkgs.solarc-gtk-theme;
+    };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme=true;
+      #gtk-font-name=JetBrains Mono, 10;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme=true;
+      #gtk-font-name=JetBrains Mono, 10;
     };
   };
 
