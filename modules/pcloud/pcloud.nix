@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   patchelfFixes = pkgs.patchelfUnstable.overrideAttrs (_finalAttrs: _previousAttrs: {
     src = pkgs.fetchFromGitHub {
       owner = "Patryk27";
@@ -9,10 +8,9 @@ let
     };
   });
   pcloudFixes = pkgs.pcloud.overrideAttrs (_finalAttrs:previousAttrs: {
-    nativeBuildInputs = previousAttrs.nativeBuildInputs ++ [ patchelfFixes ];
+    nativeBuildInputs = previousAttrs.nativeBuildInputs ++ [patchelfFixes];
   });
-in
-{
+in {
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = [
     pcloudFixes

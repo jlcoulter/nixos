@@ -1,38 +1,38 @@
-{ config, pkgs, ... }:
-
-let rootPath = ../.; in
-
-{ 
+{
+  config,
+  pkgs,
+  ...
+}: let
+  rootPath = ../.;
+in {
   imports = [
     ./theme.nix
-    ./nvim.nix
   ];
 
   home.username = "jc";
   home.homeDirectory = "/home/jc";
-  home.stateVersion = "24.11"; 
+  home.stateVersion = "24.11";
 
   home.file = {
     #"config.ron".source = ../modules/leftwm;
   };
 
+  home.pointerCursor = {
+    name = "phinger-cursors-dark";
+    package = pkgs.phinger-cursors;
+    size = 24;
+  };
+
   gtk = {
-    enable = false;
-    cursorTheme = {
-      name = "Nordic";
-      package = pkgs.nordic;
-    };
-    theme = {
-      name = "SolArc-Dark";
-      package = pkgs.solarc-gtk-theme;
-    };
+    enable = true;
+    gtk2.extraConfig = "gtk-theme-name = 'phinger-cursors-dark';";
     gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme=true;
-      #gtk-font-name=JetBrains Mono, 10;
+      gtk-application-prefer-dark-theme = true;
+      gtk-theme-name = "Nordic";
     };
     gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme=true;
-      #gtk-font-name=JetBrains Mono, 10;
+      gtk-application-prefer-dark-theme = true;
+      gtk-theme-name = "Nordic";
     };
   };
 
@@ -44,8 +44,8 @@ let rootPath = ../.; in
       pu = "push";
       co = "checkout";
       cm = "commit";
-      };
     };
+  };
 
   programs.zellij = {
     enable = true;
@@ -59,34 +59,28 @@ let rootPath = ../.; in
     syntaxHighlighting.enable = true;
     autocd = true;
 
-	  shellAliases = {
-	    ll = "ls -l";
- 	   update = "sudo nixos-rebuild switch --flake ~/flake/#default";
- 	   flake = "nvim ~/flake/flake.nix";
- 	   home = "nvim ~/flake/hosts/home/home.nix";
- 	   config = "nvim ~/flake/hosts/home/configuration.nix";
-	   pynix = "nix-shell ~/code/shell.nix";
-	   nvimconfig = "nvim ~/.config/nvim/init.vim";
-	   fabric = "java -Xmx2G -jar fabric-server-mc.1.21.4-loader.0.16.10-launcher.1.0.1.jar nogui";
-   	 };
+    shellAliases = {
+      ll = "ls -l";
+      update = "sudo nixos-rebuild switch --flake ~/flake/#default";
+      flake = "vim ~/flake/flake.nix";
+      home = "vim ~/flake/hosts/home/home.nix";
+      config = "vim ~/flake/hosts/home/configuration.nix";
+      pynix = "nix-shell ~/code/shell.nix";
+      nvimconfig = "vim ~/.config/nvim/init.vim";
+      fabric = "java -Xmx2G -jar fabric-server-mc.1.21.4-loader.0.16.10-launcher.1.0.1.jar nogui";
+    };
 
- 	  oh-my-zsh = {
-   	       enable = true;
-		  plugins = [
-
-		  ];
-		  theme = "agnoster";
-		};
-	
-
-      };
-  
-
+    oh-my-zsh = {
+      enable = true;
+      plugins = [
+      ];
+      theme = "agnoster";
+    };
+  };
 
   home.sessionVariables = {
     EDITOR = "nvim";
   };
-
 
   programs.home-manager.enable = true;
 }
