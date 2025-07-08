@@ -1,26 +1,24 @@
-{ config, pkgs, ... }:
-
-let 
-
-locale = "en_AU.UTF-8";
-
-in
-
 {
+  config,
+  pkgs,
+  ...
+}: let
+  locale = "en_AU.UTF-8";
+in {
   # Boot
   boot = {
-    loader ={
+    loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
   };
-  
+
   # Locale
   time.timeZone = "Australia/Sydney";
   i18n = {
     defaultLocale = "en_GB.UTF-8";
     extraLocaleSettings = {
-      LC_ADDRESS = locale; 
+      LC_ADDRESS = locale;
       LC_INDENTIFICATION = locale;
       LC_MEASUREMENT = locale;
       LC_MONETARY = locale;
@@ -29,7 +27,7 @@ in
       LC_PAPER = locale;
       LC_TELEPHONE = locale;
       LC_TIME = locale;
-      };
+    };
   };
 
   services.xserver.xkb.layout = "us";
@@ -52,7 +50,7 @@ in
     };
     settings = {
       auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
     };
   };
 
@@ -63,11 +61,11 @@ in
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 25565 ];
+      allowedTCPPorts = [25565 5678];
       allowedUDPPortRanges = [];
     };
-  };  
-  
+  };
+
   # Audio
   security.rtkit.enable = true;
   services.pipewire = {
@@ -78,7 +76,6 @@ in
       support32Bit = true;
     };
   };
-
 
   # Video
   services.xserver.deviceSection = ''Option "TearFree" "true"'';

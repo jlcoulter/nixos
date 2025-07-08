@@ -17,14 +17,8 @@ in {
     #"config.ron".source = ../modules/leftwm;
   };
 
-  home.pointerCursor = {
-    name = "phinger-cursors-dark";
-    package = pkgs.phinger-cursors;
-    size = 24;
-  };
-
   gtk = {
-    enable = true;
+    enable = false;
     gtk2.extraConfig = "gtk-theme-name = 'phinger-cursors-dark';";
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
@@ -68,6 +62,7 @@ in {
       pynix = "nix-shell ~/code/shell.nix";
       nvimconfig = "vim ~/.config/nvim/init.vim";
       fabric = "java -Xmx2G -jar fabric-server-mc.1.21.4-loader.0.16.10-launcher.1.0.1.jar nogui";
+      clobber = "git add . && git commit -m \"$(date)\" && git push";
     };
 
     oh-my-zsh = {
