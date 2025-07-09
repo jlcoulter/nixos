@@ -17,5 +17,6 @@
     wireplumber
     hyprpolkitagent
     nwg-look
+    pywal
   ];
 }
