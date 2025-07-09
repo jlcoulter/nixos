@@ -32,23 +32,16 @@
     description = "Jack Coulter";
     extraGroups = ["networkmanager" "wheel" "scanner" "lp" "audio"];
     packages = with pkgs; [
-      libreoffice
-      signal-desktop
       zsh
       neofetch
       prusa-slicer
       discord
       spotify
       vscode
-      exercism
       neovim
       git
       alacritty
       protonup
-      sane-airscan
-      sane-backends
-      darktable
-      skanlite
       firefox
       teams-for-linux
       zellij
