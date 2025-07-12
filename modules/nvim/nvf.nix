@@ -49,6 +49,12 @@
             lsp.server = "gopls";
             lsp.package = ["gopls"];
           };
+          bash = {
+            enable = true;
+            format.enable = true;
+            lsp.server = "bash-ls";
+            lsp.package = ["bash-language-server"];
+          };
         };
         diagnostics.nvim-lint.enable = true;
       };
