@@ -13,13 +13,6 @@ window {
     border: 3px solid @blue_border;
     border-radius: 20px;
 }
-
-window > box {
-  min-width: 300px;
-  max-width: 600px;
-  min-height: 200px;
-  max-height: 400px;
-}
  
 #input {
     margin-bottom: 15px;
@@ -47,7 +40,7 @@ window > box {
 }
  
 #entry {
-    padding: 10px;
+    padding: 4px;
 }
  
 #entry:nth-child(even) {

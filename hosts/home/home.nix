@@ -17,19 +17,6 @@ in {
     #"config.ron".source = ../modules/leftwm;
   };
 
-  gtk = {
-    enable = false;
-    gtk2.extraConfig = "gtk-theme-name = 'phinger-cursors-dark';";
-    gtk3.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
-      gtk-theme-name = "Nordic";
-    };
-    gtk4.extraConfig = {
-      gtk-application-prefer-dark-theme = true;
-      gtk-theme-name = "Nordic";
-    };
-  };
-
   programs.git = {
     enable = true;
     userName = "jlcoulter";
