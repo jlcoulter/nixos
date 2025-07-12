@@ -13,6 +13,7 @@
     ../../modules/printer/printer.nix
     ../system/system.nix
     ../../modules/nvim/nvf.nix
+    ../../modules/exercism/exercism.nix
   ];
 
   programs.zsh.enable = true;
