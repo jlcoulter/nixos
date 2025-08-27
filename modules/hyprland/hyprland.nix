@@ -16,6 +16,7 @@
     pipewire
     wireplumber
     hyprpolkitagent
+    hyprsunset
     nwg-look
     pywal
   ];

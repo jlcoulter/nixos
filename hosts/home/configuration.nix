@@ -35,6 +35,7 @@
       zsh
       neofetch
       prusa-slicer
+      freecad
       discord
       spotify
       vscode
@@ -46,8 +47,14 @@
       teams-for-linux
       zellij
       nixd
+      gopls
       bash-language-server
       xfce.thunar
+      feh
+      novelwriter
+      polkit
+      rpi-imager
+      copyq
     ];
   };
 

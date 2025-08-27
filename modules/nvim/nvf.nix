@@ -11,7 +11,7 @@
         assistant = {
           chatgpt.mappings.grammarCorrection.enable = true;
           copilot = {
-            enable = true;
+            enable = false;
             cmp = {
               enable = true;
             };
@@ -28,6 +28,7 @@
         languages = {
           enableLSP = true;
           enableTreesitter = true;
+          enableFormat = true;
           nix = {
             enable = true;
             format.enable = true;
@@ -55,6 +56,14 @@
             lsp.server = "bash-ls";
             lsp.package = ["bash-language-server"];
           };
+          clang = {
+            enable = true;
+          };
+          rust.enable = true;
+          sql.enable = true;
+          ts.enable = true;
+          zig.enable = true;
+          html.enable = true;
         };
         diagnostics.nvim-lint.enable = true;
       };
