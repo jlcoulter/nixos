@@ -19,6 +19,13 @@
   programs.steam.enable = true;
   programs.steam.gamescopeSession.enable = true;
   programs.gamemode.enable = true;
+  programs.nix-ld.enable = true;
+
+  programs.nix-ld.libraries = with pkgs; [
+    # Add any missing dynamic libraries for unpackaged programs
+
+    # here, NOT in environment.systemPackages
+  ];
 
   nix.settings.trusted-users = ["root" "jc"];
 
@@ -36,7 +43,6 @@
       neofetch
       prusa-slicer
       freecad
-      discord
       spotify
       vscode
       neovim
@@ -55,6 +61,7 @@
       polkit
       rpi-imager
       copyq
+      autocutsel
     ];
   };
 
