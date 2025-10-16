@@ -19,7 +19,6 @@
     hyprsunset
     hypridle
     hyprlock
-    brightnessctl
     nwg-look
     pywal
   ];
